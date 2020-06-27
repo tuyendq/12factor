@@ -71,12 +71,14 @@ module.exports = {
       *                                                                           *
       ****************************************************************************/
       // ssl: true,
-
     },
 
+    mongo: {
+      adapter: "sails-mongo",
+      url: process.env.MONGO_URL
+    }
+    
   },
-
-
 
   models: {
 
@@ -151,6 +153,9 @@ module.exports = {
       // allowOrigins: [
       //   'https://example.com',
       // ]
+      allowOrigins: [
+        'https://localhost'
+      ]
     },
 
   },
@@ -240,6 +245,9 @@ module.exports = {
   *                                                                          *
   ***************************************************************************/
   sockets: {
+    // onlyAllowOrigins: [
+    //   "http://localhost"
+    // ]
 
     /***************************************************************************
     *                                                                          *
@@ -250,10 +258,11 @@ module.exports = {
     * > Be sure to use the right protocol!  ("http://" vs. "https://")         *
     *                                                                          *
     ***************************************************************************/
-    // onlyAllowOrigins: [
-    //   'https://example.com',
-    //   'https://staging.example.com',
-    // ],
+    onlyAllowOrigins: [
+      'https://localhost',
+      'https://example.com',
+      'https://staging.example.com',
+    ],
 
 
     /***************************************************************************
