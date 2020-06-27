@@ -8,16 +8,27 @@ services:
     expose:
       - "27017"
   
+  kv:
+    image: redis:alpine
+    volumes:
+      - redis-data:/data
+    expose:
+      - "6379"
+  
   app:
-    image: message-app:v0.1
+    image: message-app:v0.2  # v0.2: use REDIS to store sessions
     ports:
       - "8000:80"
     links:
       - mongo
+      - kv
     depends_on:
       - mongo
+      - kv
     environment:
       - MONGO_URL=mongodb://mongo/messageApp
+      - REDIS_HOST=kv
 
 volumes:
   mongo-data:
+  redis-data:
